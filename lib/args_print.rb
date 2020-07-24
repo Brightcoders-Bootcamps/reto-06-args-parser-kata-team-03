@@ -4,11 +4,13 @@
 class PrintArguments
   def initialize; end
 
-  def logging
-    puts 'Iniciando sesion'
+  def logging(enviar)
+    puts enviar, 'Iniciando sesion en:',  ENV['USERDOMAIN'] 
   end
 
   def save_port(enviar)
+    #Integer(enviar)
+    #raises ArgumentError: invalid value for Integer(): enviar
     puts 'Entrando en puerto: ', enviar
   end
 
@@ -17,10 +19,17 @@ class PrintArguments
   end
 
   def save_list_s(enviar)
-    puts 'Lista tipo String enviada', enviar
+    #temp = enviar.split(',')
+    puts 'Lista tipo String enviada'
+    #temp.each_with_index do |i|
+    #  puts temp[i]
+    #end
   end
 
   def save_list_i(enviar)
+    #temp = enviar.split(',')
+    #Integer(temp)
+    #raises ArgumentError
     puts 'Lista tipo Int enviada', enviar
   end
 end

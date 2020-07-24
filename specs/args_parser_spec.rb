@@ -2,49 +2,40 @@
 
 require File.join(File.dirname(__FILE__), '../lib/args_parser')
 
-describe Parser do 
-  describe '.detect_arguments' 
-    context 'when -l is not reciving any value'
-    before { ARGV.replace %w[-l 90] } # Mocking ARGV
+describe Parser do
+  describe '.detect_arguments' do
+    context 'when -l is not reciving any value' do
+      before { ARGV.replace %w[ -l -p 8080 -d /usr/logs ] } # Mocking ARGV
 
-  it '', 'La bandera no recibe ningún valor'
-   expect
-   expect
+      it '-l does not need to receive any kind of data', 'The flag does not receive data' do
+        expect(ARGV[0]).to eq('-l')
+      end
 
+      it 'and -p does not receive the correct value', 'The flag receives a correct port' do
+        expect(ARGV[1]).to eq('-p')
+        expect(ARGV[2]).to be_kind_of(String)
+      end
+  
+      it '-d does not receive any value ', 'The flag -d receives the correct type of data' do
+        expect(ARGV[3]).to eq('-d')
+        expect(ARGV[4]).to be_kind_of(String)
+      end
+    end
+  end
+
+  describe '.detect_arguments' do
+    context 'when -g is detected' do
+      before{ ARGV.replace %w[ -g this,is,a,list -d 1,2,3,4,-5 ]}
+
+      it 'does not receive any value or the value is not valid', 'The flag receive a string list' do
+        expect(ARGV[0]).to eq('-g')
+        expect(ARGV[1]).to be_kind_of(String)
+      end
+
+      it 'and -d does not receive any value, or the value is not valid', 'The flag receive a integer list' do
+        expect(ARGV[2]).to eq('-d')
+        expect(ARGV[3]).to be_kind_of(String)
+      end
+    end
+  end
 end
-
-#describe Parser do 
- 
-# let(:parser) { Parser.new }
-
-
-#  describe '.detect_arguments' do
-#    context 'when -l receive a value' do
-#      before { ARGV.replace %w[-l 90] } # Mocking ARGV
-
-#      it 'raises an error explaining that this arg does not receive any value' do
-#        expect{ parser.detect_arguments }.to raise_error ArgumentError, 'La bandera -l no recibe ningun valor'
-#      end
-#    end
-
-#    context 'when aside -l there is another flag' do
-#      before { ARGV.replace %w[-l -p] }
-
-#      it { expect { parser.detect_arguments}.not_to raise_error }
-#    end
-#  end
-
-  #context 'what kind of value is -l' do
-  #  before { ARGV.replace %w[-l -p] }
-  #  it '-l is not a boolean' do
-  #    parser = Parser.detect_arguments
-
-  #    expect(parser.logging).to be_kind_of Boolean
-  #    expect(parser.logging).to eq true
-
-  #logging -> Boolean, true or false, default values false
-  #port -> Integer, 80-0909, default values 0
-  #directory -> String, default value ''
-  
-  
-   
