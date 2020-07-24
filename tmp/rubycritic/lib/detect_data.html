@@ -52,7 +52,7 @@
       </span>
     </div>
     <div>
-      <h3><small>lib /</small> args_print.rb</h3>
+      <h3><small>lib /</small> detect_data.rb</h3>
     </div>
   </div>
   <!--End Page Title -->
@@ -68,15 +68,15 @@
           </div>
           <div class="code-statistics col-md-11">
             <div class="col-md-3">
-              <div><span class="metric">40</span><small> lines of codes</small></div>
-              <div><span class="metric">6</span><small> methods</small></div>
+              <div><span class="metric">30</span><small> lines of codes</small></div>
+              <div><span class="metric">4</span><small> methods</small></div>
             </div>
             <div class="col-md-3">
-              <div><span class="metric">2.3</span><small> complexity/method</small></div>
-              <div><span class="metric">2</span><small> churn</small></div>
+              <div><span class="metric">3.8</span><small> complexity/method</small></div>
+              <div><span class="metric">0</span><small> churn</small></div>
             </div>
             <div class="col-md-3">
-              <div><span class="metric">13.54</span><small> complexity</small></div>
+              <div><span class="metric">15.29</span><small> complexity</small></div>
               <div><span class="metric">0</span><small> duplications</small></div>
             </div>
           </div>
@@ -88,8 +88,8 @@
             <li><a href="#" id="toggle-code" class="toggle-button button">code</a></li>
             <li class="active">
               <a href="#" id="toggle-smells" class="toggle-button button">
-                0
-                smell
+                2
+                smells
               </a>
             </li>
           </ul>
@@ -97,45 +97,35 @@
       </div>
     </div>
 
-    <code class="prettyprint linenums lang-ruby file-code js-file-code"># frozen_string_literal: true
+    <code class="prettyprint linenums lang-ruby file-code js-file-code">require_relative &#39;args_print.rb&#39;
 
-require_relative &#39;detect_data.rb&#39;
-require_relative &#39;save_data.rb&#39;
+#Clase para ver que se cumpla bien la sintaxs
+class DetectData
+	def initialization; end
+	def evalue_port(enviar)
+	  raise ArgumentError.new(
+      &quot;Expected as integer got string&quot;
+    ) if is_number? (enviar)
+		puts &#39;Entrando en puerto: &#39;, enviar
+	end
 
-# Imprimir datos
-class PrintArguments
-  attr_reader :detect
+	def is_number? (enviar)
+    true if Integer(enviar) 
+      print &quot; &quot; 
+    rescue false 
+	end
 
-  def initialize
-    @detect= DetectData.new
-    @data = AllData.new
-  end
+	def separe(enviar)
+		temp = enviar.split(&#39;,&#39;)
+		#print &quot;separacion \n&quot;
+		temp.each do |c|<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden="true"></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Feature-Envy.md" target="_blank"><b>FeatureEnvy</b></a>        </span>      </div>      <span>DetectData#separe refers to 'temp' more than self (maybe move it to another class?)</span>              <span>Locations:</span>                  <a href="detect_data.html#L22" class="js-smell-location">0</a>                  <a href="detect_data.html#L24" class="js-smell-location">1</a>                  </div>  </li>  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden="true"></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Uncommunicative-Variable-Name.md" target="_blank"><b>UncommunicativeVariableName</b></a>        </span>      </div>      <span>DetectData#separe has the variable name 'c'</span>          </div>  </li></ol>
+			#puts c 
+			enviar = temp[0][c]<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden="true"></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Feature-Envy.md" target="_blank"><b>FeatureEnvy</b></a>        </span>      </div>      <span>DetectData#separe refers to 'temp' more than self (maybe move it to another class?)</span>              <span>Locations:</span>                  <a href="detect_data.html#L22" class="js-smell-location">0</a>                  <a href="detect_data.html#L24" class="js-smell-location">1</a>                  </div>  </li></ol>
+			is_number? (enviar)
+		end
+		#print temp
+	end
 
-  def logging(enviar)
-    puts enviar, &#39;Iniciando sesion en:&#39;,  ENV[&#39;USERDOMAIN&#39;]
-  end
-
-  def save_port(enviar)
-    @detect.evalue_port(enviar)
-    @data.port = enviar
-  end
-
-  def save_directory(enviar)
-    puts &#39;Direccionando a: &#39;, enviar
-    @data.dir = enviar
-  end
-
-  def save_list_s(enviar)
-    @detect.separe(enviar)
-    puts &#39;Lista tipo String enviada&#39;
-    @data.list_s = enviar
-  end
-
-  def save_list_i(enviar)
-    @detect.separe(enviar)
-    puts &#39;Lista tipo Int enviada&#39;, enviar
-    @data.list_i = enviar
-  end
 end
 </code>
   </div>

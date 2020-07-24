@@ -68,15 +68,15 @@
           </div>
           <div class="code-statistics col-md-11">
             <div class="col-md-3">
-              <div><span class="metric">49</span><small> lines of codes</small></div>
+              <div><span class="metric">53</span><small> lines of codes</small></div>
               <div><span class="metric">4</span><small> methods</small></div>
             </div>
             <div class="col-md-3">
-              <div><span class="metric">8.1</span><small> complexity/method</small></div>
-              <div><span class="metric">2</span><small> churn</small></div>
+              <div><span class="metric">7.8</span><small> complexity/method</small></div>
+              <div><span class="metric">3</span><small> churn</small></div>
             </div>
             <div class="col-md-3">
-              <div><span class="metric">32.35</span><small> complexity</small></div>
+              <div><span class="metric">31.31</span><small> complexity</small></div>
               <div><span class="metric">0</span><small> duplications</small></div>
             </div>
           </div>
@@ -88,7 +88,7 @@
             <li><a href="#" id="toggle-code" class="toggle-button button">code</a></li>
             <li class="active">
               <a href="#" id="toggle-smells" class="toggle-button button">
-                2
+                4
                 smells
               </a>
             </li>
@@ -100,15 +100,12 @@
     <code class="prettyprint linenums lang-ruby file-code js-file-code"># frozen_string_literal: true
 
 require_relative &#39;args_print.rb&#39;
-
 # Class Parser syntactic analyzer
 class Parser<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden="true"></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Instance-Variable-Assumption.md" target="_blank"><b>InstanceVariableAssumption</b></a>        </span>      </div>      <span>Parser assumes too much for instance variable '@arguments'</span>          </div>  </li>  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden="true"></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Instance-Variable-Assumption.md" target="_blank"><b>InstanceVariableAssumption</b></a>        </span>      </div>      <span>Parser assumes too much for instance variable '@enviar'</span>          </div>  </li></ol>
   attr_reader :save, :arguments, :enviar
 
   IDENTIFIERS = {
     Log_in: &#39;-l&#39;,
-    #Port: &#39;-p&#39;,
-    #Directory: &#39;-d&#39;,
     List_int: &#39;-d&#39;,
     List_str: &#39;-g&#39;
   }.freeze
@@ -132,15 +129,22 @@ class Parser<ol class="nocode errors smells">  <li>    <div class="description">
     end
   end
  
+
   def l_flags
     cadena = @arguments
-    save.send(OPTION_MAPPING[cadena], enviar)
+   # print &quot;cadena&quot;, cadena, &quot;\n&quot;
+   # print &quot;opcion &quot;,OPTION_MAPPING[cadena]
+    if OPTION_MAPPING[cadena] == nil <ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden="true"></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>Parser#l_flags calls 'OPTION_MAPPING[cadena]' 2 times</span>              <span>Locations:</span>                  <a href="args_parser.html#L38" class="js-smell-location">0</a>                  <a href="args_parser.html#L41" class="js-smell-location">1</a>                  </div>  </li>  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden="true"></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Nil-Check.md" target="_blank"><b>NilCheck</b></a>        </span>      </div>      <span>Parser#l_flags performs a nil-check</span>          </div>  </li></ol>
+      #puts &quot;no esta en el mapping&quot;
+    else
+      @save.send(OPTION_MAPPING[cadena], enviar)<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden="true"></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>Parser#l_flags calls 'OPTION_MAPPING[cadena]' 2 times</span>              <span>Locations:</span>                  <a href="args_parser.html#L38" class="js-smell-location">0</a>                  <a href="args_parser.html#L41" class="js-smell-location">1</a>                  </div>  </li></ol>
+    end
   end
 
   def g_flags
     cadena = @arguments
-    return save.save_list_s(@enviar) if cadena == IDENTIFIERS[:List_str]
-    return save.save_list_i(@enviar) if cadena == IDENTIFIERS[:List_int]
+    return @save.save_list_s(@enviar) if cadena == IDENTIFIERS[:List_str]
+    return @save.save_list_i(@enviar) if cadena == IDENTIFIERS[:List_int]
   end
 end
 

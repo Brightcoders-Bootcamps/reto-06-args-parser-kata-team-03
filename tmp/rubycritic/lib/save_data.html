@@ -52,7 +52,7 @@
       </span>
     </div>
     <div>
-      <h3><small>lib /</small> args_print.rb</h3>
+      <h3><small>lib /</small> save_data.rb</h3>
     </div>
   </div>
   <!--End Page Title -->
@@ -68,15 +68,15 @@
           </div>
           <div class="code-statistics col-md-11">
             <div class="col-md-3">
-              <div><span class="metric">40</span><small> lines of codes</small></div>
-              <div><span class="metric">6</span><small> methods</small></div>
+              <div><span class="metric">9</span><small> lines of codes</small></div>
+              <div><span class="metric">1</span><small> methods</small></div>
             </div>
             <div class="col-md-3">
-              <div><span class="metric">2.3</span><small> complexity/method</small></div>
-              <div><span class="metric">2</span><small> churn</small></div>
+              <div><span class="metric">0.0</span><small> complexity/method</small></div>
+              <div><span class="metric">0</span><small> churn</small></div>
             </div>
             <div class="col-md-3">
-              <div><span class="metric">13.54</span><small> complexity</small></div>
+              <div><span class="metric">0.0</span><small> complexity</small></div>
               <div><span class="metric">0</span><small> duplications</small></div>
             </div>
           </div>
@@ -88,8 +88,8 @@
             <li><a href="#" id="toggle-code" class="toggle-button button">code</a></li>
             <li class="active">
               <a href="#" id="toggle-smells" class="toggle-button button">
-                0
-                smell
+                4
+                smells
               </a>
             </li>
           </ul>
@@ -99,44 +99,13 @@
 
     <code class="prettyprint linenums lang-ruby file-code js-file-code"># frozen_string_literal: true
 
-require_relative &#39;detect_data.rb&#39;
-require_relative &#39;save_data.rb&#39;
+# clase que almacena la informacion
+class AllData
+  attr_accessor :port, :dir, :list_i, :list_s<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden="true"></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Attribute.md" target="_blank"><b>Attribute</b></a>        </span>      </div>      <span>AllData#dir is a writable attribute</span>          </div>  </li>  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden="true"></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Attribute.md" target="_blank"><b>Attribute</b></a>        </span>      </div>      <span>AllData#list_i is a writable attribute</span>          </div>  </li>  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden="true"></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Attribute.md" target="_blank"><b>Attribute</b></a>        </span>      </div>      <span>AllData#list_s is a writable attribute</span>          </div>  </li>  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden="true"></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Attribute.md" target="_blank"><b>Attribute</b></a>        </span>      </div>      <span>AllData#port is a writable attribute</span>          </div>  </li></ol>
 
-# Imprimir datos
-class PrintArguments
-  attr_reader :detect
-
-  def initialize
-    @detect= DetectData.new
-    @data = AllData.new
-  end
-
-  def logging(enviar)
-    puts enviar, &#39;Iniciando sesion en:&#39;,  ENV[&#39;USERDOMAIN&#39;]
-  end
-
-  def save_port(enviar)
-    @detect.evalue_port(enviar)
-    @data.port = enviar
-  end
-
-  def save_directory(enviar)
-    puts &#39;Direccionando a: &#39;, enviar
-    @data.dir = enviar
-  end
-
-  def save_list_s(enviar)
-    @detect.separe(enviar)
-    puts &#39;Lista tipo String enviada&#39;
-    @data.list_s = enviar
-  end
-
-  def save_list_i(enviar)
-    @detect.separe(enviar)
-    puts &#39;Lista tipo Int enviada&#39;, enviar
-    @data.list_i = enviar
-  end
+  def initialization; end
 end
+
 </code>
   </div>
 </div>

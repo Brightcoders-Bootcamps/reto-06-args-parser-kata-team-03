@@ -1,15 +1,12 @@
 # frozen_string_literal: true
 
 require_relative 'args_print.rb'
-
 # Class Parser syntactic analyzer
 class Parser
   attr_reader :save, :arguments, :enviar
 
   IDENTIFIERS = {
     Log_in: '-l',
-    #Port: '-p',
-    #Directory: '-d',
     List_int: '-d',
     List_str: '-g'
   }.freeze
@@ -33,24 +30,22 @@ class Parser
     end
   end
  
-  ARGV.each_slice(2).each do |option|
-    function_name = option[0]
-    next unless OPTION_MAPPING[function_name]
-
-    argument = option[1]
-    save.send(OPTION_MAPPING[function_name], argument)
-  end
-
 
   def l_flags
     cadena = @arguments
-    save.send(OPTION_MAPPING[cadena], enviar)
+   # print "cadena", cadena, "\n"
+   # print "opcion ",OPTION_MAPPING[cadena]
+    if OPTION_MAPPING[cadena] == nil 
+      #puts "no esta en el mapping"
+    else
+      @save.send(OPTION_MAPPING[cadena], enviar)
+    end
   end
 
   def g_flags
     cadena = @arguments
-    return save.save_list_s(@enviar) if cadena == IDENTIFIERS[:List_str]
-    return save.save_list_i(@enviar) if cadena == IDENTIFIERS[:List_int]
+    return @save.save_list_s(@enviar) if cadena == IDENTIFIERS[:List_str]
+    return @save.save_list_i(@enviar) if cadena == IDENTIFIERS[:List_int]
   end
 end
 
